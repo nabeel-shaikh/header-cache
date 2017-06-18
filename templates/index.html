@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parse Email Header</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {% for category, message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <h3>Parse Email Header</h3>
+        <form method=post enctype=multipart/form-data>
+            <p><input type="file" name="header_file" accept=".txt"><br>
+            <input type=submit value=Upload>
+        </form>
+        {% if data|length > 0 %}
+            {% for key, value in data.items() %}
+                {% if value %}
+                    {% if value|length > 0 %}
+                        <b>{{ key }}: </b> {{ value[0] }}<br>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            No email header information found
+        {% endif %}
+    </div>
+</body>
+</html>
