@@ -33,7 +33,7 @@ def index():
             return redirect(url_for('index'))  # Follow POST/Redirect/Get Pattern
     return render_template(
         'index.html',
-        data=session['data']
+        data=session.get('data')
         )
 
 

@@ -24,16 +24,18 @@
             <p><input type="file" name="header_file" accept=".txt"><br>
             <input type=submit value=Upload>
         </form>
-        {% if data|length > 0 %}
-            {% for key, value in data.items() %}
-                {% if value %}
-                    {% if value|length > 0 %}
-                        <b>{{ key }}: </b> {{ value[0] }}<br>
+        {% if data %}
+            {% if data|length > 0 %}
+                {% for key, value in data.items() %}
+                    {% if value %}
+                        {% if value|length > 0 %}
+                            <b>{{ key }}: </b> {{ value[0] }}<br>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            No email header information found
+                {% endfor %}
+            {% else %}
+                No email header information found
+            {% endif %}
         {% endif %}
     </div>
 </body>
